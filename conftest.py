@@ -43,6 +43,7 @@ def page(browser, base_url, request):
     Records video and takes screenshot on failure.
     """
     ctx = browser.new_context(
+        timezone_id="Europe/Warsaw",
         base_url=base_url,
         record_video_dir=str(VIDEOS_DIR),
         record_video_size={"width": 1280, "height": 720},
