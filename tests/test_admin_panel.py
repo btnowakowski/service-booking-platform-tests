@@ -21,7 +21,13 @@ def test_admin_panel_navigate_to_dashboard(admin_page):
 
 @mark.admin
 def test_admin_panel_stat_cards_visible(admin_page):
-    """Verify all stat cards are visible"""
+    """Verify all stat cards are visible
+    datatestid attributes to check for future reference:
+    [datatestid=stats-approved]
+    [datatestid=stats-canceled]
+    [datatestid=stats-pending]
+    [datatestid=stats-all]
+    """
 
     stat_cards = admin_page.locator(".stat-card")
     assert stat_cards.count() >= 4, "Should have at least 4 stat cards"
@@ -64,7 +70,9 @@ def test_admin_panel_stat_dots_visible(admin_page):
 def test_admin_panel_pending_reservations_list(admin_page):
     """Verify pending reservations list structure"""
 
-    pending_list = admin_page.locator("ul.mb-0").first
+    pending_list = admin_page.locator(
+        "ul.mb-0, [data-testid='pending-reservations-list']"
+    ).first
 
     if not pending_list.is_visible():
         skip("Pending reservations list not visible")
@@ -72,6 +80,10 @@ def test_admin_panel_pending_reservations_list(admin_page):
     reservation_items = pending_list.locator("li.py-2")
 
     if reservation_items.count() == 0:
+        assert (
+            admin_page.locator("[data-testid='no-pending-reservations']").is_visible()
+            or admin_page.locator("text=Brak oczekujących rezerwacji").is_visible()
+        ), "Expected 'Brak oczekujących rezerwacji.' message"
         skip("No pending reservations available")
 
     # Check first reservation item structure
