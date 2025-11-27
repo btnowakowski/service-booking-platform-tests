@@ -45,7 +45,7 @@ def admin_with_test_service(admin_page):
         admin_page.fill("#id_name", "Test Service")
         admin_page.fill("#id_description", "Service for testing purposes")
         admin_page.fill("#id_price", "50")
-        admin_page.fill("#id_slot_duration", "30")
+        admin_page.fill("#id_slot_duration", "90")
         admin_page.get_by_role("button", name="Zapisz").click()
 
     return admin_page
