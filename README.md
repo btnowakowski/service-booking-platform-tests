@@ -1,8 +1,8 @@
-# accommodations_tests
+# service_booking_platform_tests
 
 ## Raport testów E2E - Github Actions, Github Pages, Allure
 
-Aktualny raport: [zobacz tutaj](https://btnowakowski.github.io/accommodations_tests/)
+Aktualny raport: [zobacz tutaj](https://btnowakowski.github.io/service-booking-platfrom-tests/)
 
 ## Uruchamianie testów lokalnie
 
