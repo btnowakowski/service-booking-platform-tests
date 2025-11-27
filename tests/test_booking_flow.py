@@ -129,13 +129,6 @@ def test_user_can_book_slot(page, booking_cleanup):
             }
         )
 
-    # Debug output
-    print(f"\n✓ Found {count} reservations:")
-    for res in reservations:
-        print(f"  [{res['index']}] {res['meta']} - {res['status']}")
-    print(f"\n✓ Looking for slot: {booking_cleanup.get('slot_label', 'N/A')}")
-    print(f"✓ Slot preview was: {slot_preview_text}")
-
     # Check for pending reservations
     pending_reservations = [
         res for res in reservations if "Oczekująca" in res["status"]

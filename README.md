@@ -1,11 +1,10 @@
 # accommodations_tests
 
-## Raport testów E2E (Allure)
+## Raport testów E2E - Github Actions, Github Pages, Allure
 
 Aktualny raport: [zobacz tutaj](https://btnowakowski.github.io/accommodations_tests/)
-Aby wygenerować raport lokalnie, użyj polecenia:
 
-## Uruchamianie testów
+## Uruchamianie testów lokalnie
 
 Domyślnie testy odpalają się przeciwko lokalnej instancji (`http://127.0.0.1:8000`).
 
