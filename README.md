@@ -2,7 +2,7 @@
 
 ## Raport testów E2E - Github Actions, Github Pages, Allure
 
-Aktualny raport: [zobacz tutaj](https://btnowakowski.github.io/service-booking-platfrom-tests/)
+Aktualny raport: [zobacz tutaj](https://btnowakowski.github.io/service-booking-platform-tests/)
 
 ## Uruchamianie testów lokalnie
 
