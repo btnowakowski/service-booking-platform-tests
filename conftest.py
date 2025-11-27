@@ -126,7 +126,8 @@ def booking_cleanup(page, request):
             )
             return
         booking_to_cancel = matched.filter(has_text="Oczekująca")
-        if booking_to_cancel.count() == 0:
+        before_count = booking_to_cancel.count()
+        if before_count == 0:
             allure.attach(
                 "No pending bookings found",
                 name="cleanup_log",
@@ -139,11 +140,29 @@ def booking_cleanup(page, request):
             cancel_button.wait_for(state="visible", timeout=SHORT)
             with page.expect_navigation(wait_until="networkidle", timeout=SHORT):
                 cancel_button.click(timeout=SHORT)
+
+            # Make sure page is loaded
             page.wait_for_load_state("networkidle")
+            # Hard reload to avoid caching issues
             matched_after = page.locator(".res-card").filter(has_text="Oczekująca")
-            assert (
-                matched_after.count() < booking_to_cancel.count()
-            ), "Cleanup failed: booking not cancelled"
+            after_count = matched_after.count()
+            if after_count == before_count:
+                page.reload(wait_until="networkidle")
+                matched_after = page.locator(".res-card").filter(has_text="Oczekująca")
+                after_count = matched_after.count()
+
+            # Retry a couple of times if count didn't change
+            retries = 2
+            while after_count == before_count and retries > 0:
+                page.wait_for_timeout(500)
+                matched_after = page.locator(".res-card").filter(has_text="Oczekująca")
+                after_count = matched_after.count()
+                retries -= 1
+
+            # Final assertion to ensure cleanup worked
+            assert (before_count == 0) or (
+                after_count < before_count
+            ), f"Cleanup failed: pending count not decreased (before={before_count}, after={after_count})"
         except Exception as e:
             debug_log.append(f"Error clicking cancel: {e}")
     except Exception as e:
