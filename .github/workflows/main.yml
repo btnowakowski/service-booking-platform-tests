@@ -2,7 +2,7 @@ name: E2E tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   workflow_dispatch:
 
 permissions:
@@ -35,20 +35,27 @@ jobs:
           ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
         run: |
-          pytest -m "not registration"
+          pytest -m "not registration" --alluredir=allure-results
+
+      - name: Install Allure
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y default-jre
+          curl -o allure-2.25.0.tgz -Ls https://github.com/allure-framework/allure2/releases/download/2.25.0/allure-2.25.0.tgz
+          tar -xzf allure-2.25.0.tgz -C /opt/
+          sudo ln -s /opt/allure-2.25.0/bin/allure /usr/bin/allure
 
       - name: Generate Allure report
         if: always()
         continue-on-error: true
         run: |
-          npx allure generate allure-results -o allure-report --clean
+          allure generate allure-results -o allure-report --clean
 
       - name: Upload artifact for Pages
-        if: always() && success()
+        if: always()
         uses: actions/upload-pages-artifact@v3
         with:
           path: allure-report
-
   deploy:
     needs: e2e
     runs-on: ubuntu-latest
