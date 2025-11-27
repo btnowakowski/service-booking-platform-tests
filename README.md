@@ -8,7 +8,7 @@ Aktualny raport: [zobacz tutaj](https://btnowakowski.github.io/service-booking-p
 
 Domyślnie testy odpalają się przeciwko lokalnej instancji (`http://127.0.0.1:8000`).
 
-1. Uruchom aplikację lokalnie ([Skorzystaj z README w repozytorium aplikacji](https://github.com/btnowakowski/mvc_projekt_semestralny)).
+1. Uruchom aplikację lokalnie ([Skorzystaj z README w repozytorium aplikacji](https://github.com/btnowakowski/service-booking-platform)).
 2. Uruchom testy i otwórz raport za pomocą poleceń:
 
 ```bash
