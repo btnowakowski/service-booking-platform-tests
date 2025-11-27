@@ -71,7 +71,9 @@ def test_user_can_book_slot(page, booking_cleanup):
         :5  # First 5 chars to identify the slot
     ]
     free_slot.click()
-    booking_cleanup["slot_label"] = free_slot.inner_text().strip()
+    booking_cleanup["slot_label"] = (
+        free_slot.inner_text().strip()
+    )  # Full label for cleanup
     # Slot booking confirmation
     book_button = page.get_by_role("button", name="Rezerwuj termin")
     book_button.wait_for(state="visible")
