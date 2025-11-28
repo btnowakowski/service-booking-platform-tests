@@ -10,6 +10,10 @@
 
 Latest Report: [Check it out](https://btnowakowski.github.io/service-booking-platform-tests/)
 
+The report will generate screenshots and reproduction videos in case of failure i.e.
+<img width="1837" height="895" alt="image" src="https://github.com/user-attachments/assets/9476a584-3473-4ef5-954b-9585ecc0255c" />
+
+
 ## Running tests locally
 
 By default set to run on (`http://127.0.0.1:8000`).
